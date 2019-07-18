@@ -1,0 +1,13 @@
+{
+    "op": "createDevice",
+    "attributes": {
+        "lotid": "2758767474",
+        "uid": "2758767474526932435123278",
+        "srk": "srk2",
+        "tmk": "tmk2",
+        "uds": "uds",
+        "fsrk": "fsrk",
+        "suds": "suds"
+    },
+    "correlationId": "262847575448953"
+}

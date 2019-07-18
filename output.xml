@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20190717 10:36:55.261" generator="Robot 3.1.2 (Python 2.7.14 on win32)">
+<suite source="D:\RAMBUS\API.robot" id="s1" name="API">
+<test id="s1-t1" name="Get Nonce">
+<kw name="Check NONCE">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Authorization=Bearer ${auth}</arg>
+<arg>Accept=${accept}</arg>
+<arg>Content-Type=${content}</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20190717 10:36:56.896" level="INFO">${header} = {u'Authorization': u'Bearer ew0KICAiYWxnIjogIkhTMjU2Ig0KfQ.ew0KICAiSUQiOiAiZm9yZF8xIiwNCiAgImlzcyI6ICJNaWNyb24iLA0KICAiZXhwIjogMzMyNTY1NDc3NjAwNiwNCiAgImlhdCI6IDE1NTkwNDc2MzEsDQogICJvcGVyYXRpb25zIjogW...</msg>
+<status status="PASS" endtime="20190717 10:36:56.896" starttime="20190717 10:36:56.894"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}/nonce/</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190717 10:36:57.677" level="INFO">${output} = {u'seconds': 0.651102, u'status': 200, u'body': {u'nonce': u'96668AFF', u'correlationId': u'87299871-644b-42ed-8484-4a664a5cc616', u'nonceTag': u'0616D0EE'}, u'headers': {'X-XSS-Protection': '1; mode=...</msg>
+<status status="PASS" endtime="20190717 10:36:57.677" starttime="20190717 10:36:56.896"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<msg timestamp="20190717 10:36:57.678" level="INFO">{u'seconds': 0.651102, u'status': 200, u'body': {u'nonce': u'96668AFF', u'correlationId': u'87299871-644b-42ed-8484-4a664a5cc616', u'nonceTag': u'0616D0EE'}, u'headers': {'X-XSS-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'Transfer-Encoding': 'chunked', 'Expires': '0', 'Server': 'openresty/1.15.8.1', 'Connection': 'keep-alive', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate', 'Date': 'Wed, 17 Jul 2019 05:04:49 GMT', 'X-Frame-Options': 'DENY', 'Content-Type': 'application/vnd.kmsgateway.rambus.v1+json;charset=UTF-8'}}</msg>
+<status status="PASS" endtime="20190717 10:36:57.678" starttime="20190717 10:36:57.677"></status>
+</kw>
+<status status="PASS" endtime="20190717 10:36:57.678" starttime="20190717 10:36:56.893"></status>
+</kw>
+<tags>
+<tag>DEBUG</tag>
+</tags>
+<status status="PASS" endtime="20190717 10:36:57.679" critical="yes" starttime="20190717 10:36:56.892"></status>
+</test>
+<test id="s1-t2" name="Check Naxos Devices">
+<kw name="Check device details">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>application/vnd.kms.rambus.v1+json</arg>
+</arguments>
+<assign>
+<var>${accept1}</var>
+</assign>
+<msg timestamp="20190717 10:36:57.681" level="INFO">${accept1} = application/vnd.kms.rambus.v1+json</msg>
+<status status="PASS" endtime="20190717 10:36:57.681" starttime="20190717 10:36:57.681"></status>
+</kw>
+<kw name="Input" library="REST">
+<tags>
+<tag>I/O</tag>
+</tags>
+<doc>*Converts the input to JSON and returns it.*</doc>
+<arguments>
+<arg>D:\\RAMBUS/payload.json</arg>
+</arguments>
+<assign>
+<var>${input_data}</var>
+</assign>
+<msg timestamp="20190717 10:36:57.683" level="INFO">${input_data} = {u'attributes': {u'uds': u'uds', u'lotid': u'2758767474', u'uid': u'2758767474526932435123278', u'srk': u'srk2', u'suds': u'suds', u'tmk': u'tmk2', u'fsrk': u'fsrk'}, u'correlationId': u'2628475754489...</msg>
+<status status="PASS" endtime="20190717 10:36:57.683" starttime="20190717 10:36:57.682"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Accept=${accept1}</arg>
+<arg>Content-Type=${content}</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20190717 10:36:57.684" level="INFO">${header} = {u'Accept': u'application/vnd.kms.rambus.v1+json', u'Content-Type': u'application/json'}</msg>
+<status status="PASS" endtime="20190717 10:36:57.684" starttime="20190717 10:36:57.683"></status>
+</kw>
+<kw name="Post" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<arguments>
+<arg>${url_post}</arg>
+<arg>body=${input_data}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190717 10:36:58.211" level="INFO">${output} = {u'seconds': 0.49384100000000003, u'status': 200, u'body': {u'correlationId': u'262847575448953'}, u'headers': {'Date': 'Wed, 17 Jul 2019 05:04:50 GMT', 'Transfer-Encoding': 'chunked', 'Connection': '...</msg>
+<status status="PASS" endtime="20190717 10:36:58.211" starttime="20190717 10:36:57.684"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<msg timestamp="20190717 10:36:58.212" level="INFO">{u'seconds': 0.49384100000000003, u'status': 200, u'body': {u'correlationId': u'262847575448953'}, u'headers': {'Date': 'Wed, 17 Jul 2019 05:04:50 GMT', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Content-Type': 'application/vnd.kms.rambus.v1+json;charset=UTF-8', 'Server': 'openresty/1.15.8.1'}}</msg>
+<status status="PASS" endtime="20190717 10:36:58.212" starttime="20190717 10:36:58.212"></status>
+</kw>
+<status status="PASS" endtime="20190717 10:36:58.213" starttime="20190717 10:36:57.681"></status>
+</kw>
+<status status="PASS" endtime="20190717 10:36:58.214" critical="yes" starttime="20190717 10:36:57.680"></status>
+</test>
+<doc>Sample API Test</doc>
+<status status="PASS" endtime="20190717 10:36:58.217" starttime="20190717 10:36:55.267"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="2">Critical Tests</stat>
+<stat fail="0" pass="2">All Tests</stat>
+</total>
+<tag>
+<stat fail="0" pass="1">DEBUG</stat>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="API" pass="2">API</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
